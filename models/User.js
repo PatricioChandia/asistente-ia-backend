@@ -34,11 +34,20 @@ const userSchema = new mongoose.Schema({
         type: String, 
         required: true 
     },
+    // ===================================
+    // ¡NUEVO CAMPO!
+    // ===================================
+    profileImageUrl: {
+        type: String,
+        default: '' // Por defecto no hay imagen
+    },
     // (NUEVO) El historial de chat del usuario
     conversation: [messageSchema]
 }, {
     timestamps: true
 });
+
+
 
 // Hook para encriptar la contraseña ANTES de guardarla
 userSchema.pre('save', async function(next) {
