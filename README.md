@@ -44,7 +44,7 @@ Sigue estos pasos para correr el servidor localmente.
 
 1. Clonar el repositorio
 
-git clone [https://github.com/tu_usuario/asistente-ia-backend.git](https://github.com/tu_usuario/asistente-ia-backend.git)
+git clone https://github.com/PatricioChandia/asistente-ia-backend](https://github.com/PatricioChandia/asistente-ia-backend)
 cd asistente-ia-backend
 
 
