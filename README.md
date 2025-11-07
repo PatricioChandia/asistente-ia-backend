@@ -4,11 +4,15 @@ Este repositorio contiene el backend (servidor) para el proyecto de asistente de
 
 ✨ Características
 
-Autenticación: Sistema de registro y login de usuarios usando JWT (Tokens).
+Autenticación: Sistema de registro (con login automático) y login de usuarios usando JWT (Tokens).
 
-Base de Datos: Guarda el historial de conversaciones de cada usuario en MongoDB.
+Gestión de Perfil: Los usuarios pueden ver y actualizar su nombre.
 
-Conexión con IA: Actúa como intermediario para procesar consultas de IA (compatible con OpenAI y Google Gemini).
+Subida de Fotos: Permite a los usuarios subir una foto de perfil, que se almacena en Cloudinary.
+
+Base de Datos: Guarda el historial de conversaciones y la URL de la foto de perfil de cada usuario en MongoDB.
+
+Conexión con IA: Actúa como intermediario para procesar consultas de IA (actualmente configurado para OpenAI).
 
 🚀 Tecnologías Utilizadas
 
@@ -28,7 +32,11 @@ axios (Para llamar a las APIs de IA externas)
 
 dotenv (Para manejar variables de entorno)
 
-nodemon (Para desarrollo)
+nodemon (Para desarrollo en vivo)
+
+multer (Para recibir la subida de archivos/fotos)
+
+cloudinary (Para alojar las fotos de perfil en la nube)
 
 📦 Instalación y Setup
 
@@ -36,7 +44,7 @@ Sigue estos pasos para correr el servidor localmente.
 
 1. Clonar el repositorio
 
-git clone [https://github.com/PatricioChandia/asistente-ia-backend.git](https://github.com/PatricioChandia/asistente-ia-backend.git)
+git clone [https://github.com/tu_usuario/asistente-ia-backend.git](https://github.com/tu_usuario/asistente-ia-backend.git)
 cd asistente-ia-backend
 
 
@@ -52,15 +60,7 @@ Crea un archivo .env en la raíz del proyecto. Puedes copiar el archivo .env.exa
 cp .env.example .env
 
 
-Deberás rellenar las siguientes variables en tu archivo .env:
-
-MONGO_URI: Tu cadena de conexión de MongoDB Atlas.
-
-JWT_SECRET: Una cadena larga y secreta para firmar tokens.
-
-OPENAI_API_KEY: (Opcional) Tu clave de API de OpenAI.
-
-GEMINI_API_KEY: (Opcional) Tu clave de API de Google AI.
+Deberás rellenar las variables en tu archivo .env.
 
 4. Iniciar el Servidor
 
@@ -71,10 +71,16 @@ El servidor se iniciará en http://localhost:3000.
 
 📡 API Endpoints
 
-POST /api/register: Registra un nuevo usuario.
+POST /api/register: Registra un nuevo usuario y devuelve un token.
 
 POST /api/login: Inicia sesión y devuelve un token JWT.
 
 GET /api/historial: (Protegido) Obtiene el historial de chat del usuario.
 
 POST /api/consulta: (Protegido) Envía una consulta a la IA y la guarda en el historial.
+
+GET /api/perfil: (Protegido) Obtiene los datos del perfil del usuario (nombre, email, foto).
+
+PUT /api/perfil: (Protegido) Actualiza el nombre del usuario.
+
+POST /api/perfil/foto: (Protegido) Sube una nueva foto de perfil y actualiza la URL del usuario.
